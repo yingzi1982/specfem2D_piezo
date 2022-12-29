@@ -11,12 +11,11 @@ if [ $operation == 'push' ]
 then
 git add $folder
 git commit -m "pushing to Github"
-#git push origin master
 git push -u origin main
 elif [ $operation == 'pull' ]
 then
 git commit -m "pulling from Github"
-git pull origin master
+git pull origin main
 fi
 
 #module unload git
