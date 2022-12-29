@@ -1,7 +1,7 @@
 #!/bin/bash
 #module load git
 operation=$1
-folder="../README.md ../bash/*sh ../figures/ ../gmt/*cpt ../gmt/*sh ../octave/*m ../fortran/modified/ ../slurm/*sh ../backup/Par_file.part_SAW_2D"
+folder="../README.md ../bash/*sh ../figures/*pdf ../gmt/*cpt ../gmt/*sh ../octave/*m ../fortran/modified/ ../slurm/*sh ../backup/Par_file.part_SAW_2D"
 #folder="../README.md"
 #../backup/* 
 
