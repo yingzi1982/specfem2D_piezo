@@ -1,0 +1,22 @@
+!========================================================================
+!
+!                   S P E C F E M 2 D ** PIEZO
+!                   --------------------------------
+!
+!                     Author: Yingzi Ying
+!                     yingzi.ying@me.com
+!
+!========================================================================
+
+subroutine finalize_piezo()
+
+use constants, only: IMAIN
+use piezo_par, only: voltage_time_function, charges
+
+implicit none
+
+write(IMAIN,*) 'piezo', voltage_time_function(1)
+deallocate(voltage_time_function)
+deallocate(charges)
+
+end subroutine

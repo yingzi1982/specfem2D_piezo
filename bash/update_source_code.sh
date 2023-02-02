@@ -13,5 +13,6 @@ echo 'copying the modified code...'
 cp -rf ../fortran/modified/piezo/ ../../../src/
 cp -rf ../fortran/modified/Makefile.in ../../../
 cp -rf ../fortran/modified/specfem2D/rules.mk ../../../src/specfem2D/
-cp -rf ../fortran/modified/specfem2D/initialize_simulation.F90 ../../../src/specfem2D/
+cp -rf ../fortran/modified/specfem2D/specfem2D.F90 ../../../src/specfem2D/
+cp -rf ../fortran/modified/specfem2D/compute_forces_viscoelastic.F90 ../../../src/specfem2D/
 fi

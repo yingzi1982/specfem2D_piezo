@@ -10,6 +10,9 @@ if length(arg_list) > 0
 else
   error('Please input filter dimension.');
 end
+
+use_force_model='.false.';
+
 [xmin_status xmin] = system('grep xmin ../backup/meshInformation | cut -d = -f 2');
 xmin = str2num(xmin);
 [xmax_status xmax] = system('grep xmax ../backup/meshInformation | cut -d = -f 2');
@@ -67,7 +70,9 @@ end
 s_cut = s_cut/max(s_cut);
 
 s = zeros(nt,1);
-s(1:length(s_cut)) = s_cut;
+%if strcmp ('.true.', strtrim(use_force_model))
+  s(1:length(s_cut)) = s_cut;
+%end
 
 sourceTimeFunction= [t s];
 save("-ascii",['../backup/sourceTimeFunction'],'sourceTimeFunction')
@@ -81,6 +86,7 @@ save("-ascii",['../backup/sourceFrequencySpetrum'],'sourceFrequencySpetrum')
 switch filter_dimension 
 case '2D'
 
+if strcmp ('.true.', strtrim(use_force_model))
 force=load('../backup/force');
 
 force_x = force(:,1);
@@ -115,8 +121,6 @@ amplitude_selection = force_rho/max(force_rho) >= .01;
 position_selection = force_x >= xmin & force_x <= xmax & force_z >= zmin;
 selection_index = find(amplitude_selection & position_selection);
 
-source_number = length(selection_index);
-source_size = size(selection_index);
 
 xs = force_x(selection_index);
 zs = force_z(selection_index);
@@ -124,6 +128,16 @@ zs = force_z(selection_index);
 %anglesource = rad2deg(force_theta(selection_index) + pi/2);
 anglesource = rad2deg(force_theta(selection_index) + pi);
 factor = force_rho(selection_index);
+
+else
+ xs = [0.0];
+ zs = [0.0];
+ anglesource = [0.0];
+ factor = [0.0];
+ source_number = 1;
+ source_size = [1 1];
+end
+
 
 %useCrossedFieldModel='.false.';
 %if strcmp(useCrossedFieldModel,'.true.')
@@ -164,8 +178,8 @@ vz                              = [0]*ones(source_size);
 fileID = fopen(['../DATA/SOURCE'],'w');
 for nSOURCE = [1:source_number]
   fprintf(fileID, 'source_surf        = %s\n', source_surf{nSOURCE})
-  fprintf(fileID, 'xs                 = %g\n', xs(nSOURCE))
-  fprintf(fileID, 'zs                 = %g\n', zs(nSOURCE))
+  fprintf(fileID, 'xs                 = %f\n', xs(nSOURCE))
+  fprintf(fileID, 'zs                 = %f\n', zs(nSOURCE))
   fprintf(fileID, 'source_type        = %i\n', source_type(nSOURCE))
   fprintf(fileID, 'time_function_type = %i\n', time_function_type(nSOURCE))
   %stf_name = [name_of_source_file{nSOURCE} '_' int2str(nSOURCE)];
@@ -178,14 +192,16 @@ for nSOURCE = [1:source_number]
   fprintf(fileID, 'Mxx                = %f\n', Mxx(nSOURCE))
   fprintf(fileID, 'Mzz                = %f\n', Mzz(nSOURCE))
   fprintf(fileID, 'Mxz                = %f\n', Mxz(nSOURCE))
-  fprintf(fileID, 'factor             = %g\n', factor(nSOURCE))
+  fprintf(fileID, 'factor             = %f\n', factor(nSOURCE))
   fprintf(fileID, 'vx                 = %f\n', vx(nSOURCE))
   fprintf(fileID, 'vz                 = %f\n', vz(nSOURCE))
   fprintf(fileID, '#\n')
 
   %dlmwrite(['../' stf_name],[t s],' ');
   if nSOURCE==1
-    dlmwrite(['../' stf_name],[t s],' ');
+    dlmwrite(['../' stf_name],[t zeros(size(s))],' ');
+    vtf_name='DATA/VTF';
+    dlmwrite(['../' vtf_name],[t s],' ');
   end
 
   %stf_fileID = fopen(stf_name,'w');

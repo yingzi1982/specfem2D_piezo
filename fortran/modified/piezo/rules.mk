@@ -44,10 +44,12 @@ piezo_TARGETS = \
 
 piezo_OBJECTS = \
 	$O/piezo_par.piezo_module.o \
-	$O/test.piezo.o \
+	$O/prepare_piezo.piezo.o \
+	$O/finalize_piezo.piezo.o \
 	$O/read_charges.piezo.o \
+	$O/read_voltage_time_function.piezo.o \
+	$O/calculate_piezo_stress.piezo.o \
 	$(EMPTY_MACRO)
-
 
 piezo_MODULES = \
 	$(FC_MODDIR)/piezo_parameters.$(FC_MODEXT) \

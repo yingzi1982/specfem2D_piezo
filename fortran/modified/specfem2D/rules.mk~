@@ -206,14 +206,17 @@ specfem2D_SHARED_OBJECTS = \
 	$O/set_color_palette.shared.o \
 	$(EMPTY_MACRO)
 
-#""""""""""""""""""""""""""""""""""""""""
+#PIEZO
 specfem2D_PIEZO_OBJECTS = \
 	$O/piezo_par.piezo_module.o \
-	$O/test.piezo.o \
+	$O/prepare_piezo.piezo.o \
+	$O/finalize_piezo.piezo.o \
 	$O/read_charges.piezo.o \
+	$O/read_voltage_time_function.piezo.o \
+	$O/piezo_stress.piezo.o \
 	$(EMPTY_MACRO)
 specfem2D_OBJECTS += $(specfem2D_PIEZO_OBJECTS)
-#""""""""""""""""""""""""""""""""""""""""
+#PIEZO
 
 JPEGLIB_OBJECTS = \
 	$O/jaricom.cc_jpeg.o \

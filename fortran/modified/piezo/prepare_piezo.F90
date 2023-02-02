@@ -1,0 +1,22 @@
+!========================================================================
+!
+!                   S P E C F E M 2 D ** PIEZO
+!                   --------------------------------
+!
+!                     Author: Yingzi Ying
+!                     yingzi.ying@me.com
+!
+!========================================================================
+
+subroutine prepare_piezo()
+
+use constants, only: myrank
+use piezo_par, only: is_piezo
+
+implicit none
+
+ if ((is_piezo) .and. (myrank == 0)) then
+   call read_charges()
+   call read_voltage_time_function()
+ endif
+end subroutine

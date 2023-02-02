@@ -1,47 +1,39 @@
 !========================================================================
 !
-!                   S P E C F E M 2 D  Version 7 . 0
+!                   S P E C F E M 2 D ** PIEZO
 !                   --------------------------------
 !
-!     Main historical authors: Dimitri Komatitsch and Jeroen Tromp
-!                              CNRS, France
-!                       and Princeton University, USA
-!                 (there are currently many more authors!)
-!                           (c) October 2017
-!
-! This software is a computer program whose purpose is to solve
-! the two-dimensional viscoelastic anisotropic or poroelastic wave equation
-! using a spectral-element method (SEM).
-!
-! This program is free software; you can redistribute it and/or modify
-! it under the terms of the GNU General Public License as published by
-! the Free Software Foundation; either version 3 of the License, or
-! (at your option) any later version.
-!
-! This program is distributed in the hope that it will be useful,
-! but WITHOUT ANY WARRANTY; without even the implied warranty of
-! MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-! GNU General Public License for more details.
-!
-! You should have received a copy of the GNU General Public License along
-! with this program; if not, write to the Free Software Foundation, Inc.,
-! 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-!
-! The full text of the license is available in file "LICENSE".
+!                     Author: Yingzi Ying
+!                     yingzi.ying@me.com
 !
 !========================================================================
 
-! note: the filename ending is .F90 to have pre-compilation with pragmas
-!            (like #ifndef WITH_MPI) working properly
-
 module piezo_par
 
-  implicit none
+use constants, only: CUSTOM_REAL
 
-  logical, parameter :: is_piezo = .true.
+implicit none
+
+logical, parameter :: is_piezo = .true.
+
+real(kind=CUSTOM_REAL), dimension(:,:), allocatable :: charges
+
+real(kind=CUSTOM_REAL), dimension(:), allocatable :: voltage_time_function
+
+integer :: charge_number
+
+double precision, parameter :: vacuum_permittivity = 8.55e-12
+
+double precision, parameter, dimension(3,6) :: piezoelectric_constant_3d = reshape(&
+[0.0d0, 0.0d0, 0.0d0, 0.0d0, 3.83d0, -2.37d0,&
+-2.37d0, 2.37d0, 0.0d0, 3.83d0, 0.0d0, 0.0d0,&
+0.23d0, 0.23d0, 1.3d0, 0.0d0, 0.0d0, 0.0d0  ], shape(piezoelectric_constant_3d), order=[2,1])
+
+double precision, parameter, dimension(2,3) :: piezoelectric_constant_2d = piezoelectric_constant_3d([1,3],[1,3,5])
 
 end module piezo_par
 
+!write(*,"(*(g0))") ((M(i,j)," ",j=1,n), new_line("A"), i=1,n)
 !
 !========================================================================
 !
