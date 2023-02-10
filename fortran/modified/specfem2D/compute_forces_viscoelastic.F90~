@@ -196,12 +196,15 @@
     sigma_zx_piezo(:,:) = 0._CUSTOM_REAL
 
     if ((is_piezo)) then !.and. (it==1)
-      do j = 1,NGLLZ
-	do i = 1,NGLLX
+      !do j = 1,NGLLZ
+	!do i = 1,NGLLX
+      do j = 1,1
+	do i = 1,1
           iglob = ibool(i,j,ispec)
           dummy_coord = [coord(1,iglob),coord(2,iglob)]
           !dummy_coord = coord(1:2,iglob)
           call calculate_piezo_stress(dummy_coord,dummy_sigma_piezo)
+          write(IMAIN,*) i,j,dummy_coord(1), dummy_coord(2), dummy_sigma_piezo(1), dummy_sigma_piezo(2), dummy_sigma_piezo(3)
           sigma_xx_piezo(i,j) = dummy_sigma_piezo(1)
 	  sigma_zz_piezo(i,j) = dummy_sigma_piezo(2)
           sigma_xz_piezo(i,j) = dummy_sigma_piezo(3)
@@ -480,7 +483,7 @@
 !PIEZO
         if ((is_piezo) .and. (.not.(ispec_is_PML(ispec)))) then
         !if ((is_piezo)) then
-          sigma_xx = sigma_xx + sigma_xx_piezo(i,j) * voltage_time_function(it)
+          !sigma_xx = sigma_xx + sigma_xx_piezo(i,j) !* voltage_time_function(it)
           !sigma_zz = sigma_zz + sigma_zz_piezo(i,j) * voltage_time_function(it)
           !sigma_xz = sigma_xz + sigma_xz_piezo(i,j) * voltage_time_function(it)
           !sigma_zx = sigma_zx + sigma_zx_piezo(i,j) * voltage_time_function(it)

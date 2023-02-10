@@ -53,9 +53,12 @@ case '2D'
 
   stress = -transpose(piezoelectric_constant)*E;
 
+  disp([min(stress(:)), max(stress(:))])
+
   stress1 = reshape(stress(1,:),nz,nx);
   stress2 = reshape(stress(2,:),nz,nx);
   stress3 = reshape(stress(3,:),nz,nx);
+
 
   [stress1partialx, stress1partialz] = gradient(stress1,dx,dz);
   [stress2partialx, stress2partialz] = gradient(stress2,dx,dz);

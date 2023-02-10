@@ -48,7 +48,8 @@ piezo_OBJECTS = \
 	$O/finalize_piezo.piezo.o \
 	$O/read_charges.piezo.o \
 	$O/read_voltage_time_function.piezo.o \
-	$O/piezo_stress.piezo.o \
+	$O/calculate_piezo_stress.piezo.o \
+	$O/print_2d_array.piezo.o \
 	$(EMPTY_MACRO)
 
 piezo_MODULES = \

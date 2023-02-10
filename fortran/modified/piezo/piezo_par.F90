@@ -22,18 +22,18 @@ real(kind=CUSTOM_REAL), dimension(:), allocatable :: voltage_time_function
 
 integer :: charge_number
 
-double precision, parameter :: vacuum_permittivity = 8.55e-12
+real(kind=CUSTOM_REAL), parameter :: vacuum_permittivity = 8.55e-12
 
-double precision, parameter, dimension(3,6) :: piezoelectric_constant_3d = reshape(&
-[0.0d0, 0.0d0, 0.0d0, 0.0d0, 3.83d0, -2.37d0,&
--2.37d0, 2.37d0, 0.0d0, 3.83d0, 0.0d0, 0.0d0,&
-0.23d0, 0.23d0, 1.3d0, 0.0d0, 0.0d0, 0.0d0  ], shape(piezoelectric_constant_3d), order=[2,1])
+real(kind=CUSTOM_REAL), parameter, dimension(3,6) :: piezoelectric_constant_3d = reshape(&
+[0.0_CUSTOM_REAL, 0.0_CUSTOM_REAL, 0.0_CUSTOM_REAL, 0.0_CUSTOM_REAL, 3.83_CUSTOM_REAL, -2.37_CUSTOM_REAL,&
+-2.37_CUSTOM_REAL, 2.37_CUSTOM_REAL, 0.0_CUSTOM_REAL, 3.83_CUSTOM_REAL, 0.0_CUSTOM_REAL, 0.0_CUSTOM_REAL,&
+0.23_CUSTOM_REAL, 0.23_CUSTOM_REAL, 1.3_CUSTOM_REAL, 0.0_CUSTOM_REAL, 0.0_CUSTOM_REAL, 0.0_CUSTOM_REAL  ], shape(piezoelectric_constant_3d), order=[2,1])
 
-double precision, parameter, dimension(2,3) :: piezoelectric_constant_2d = piezoelectric_constant_3d([1,3],[1,3,5])
+real(kind=CUSTOM_REAL), parameter, dimension(2,3) :: piezoelectric_constant_2d = piezoelectric_constant_3d([1,3],[1,3,5])
 
 end module piezo_par
 
-!write(*,"(*(g0))") ((M(i,j)," ",j=1,n), new_line("A"), i=1,n)
+
 !
 !========================================================================
 !
