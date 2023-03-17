@@ -347,9 +347,14 @@
   program specfem2D
 
   use specfem_par, only: UNDO_ATTENUATION_AND_OR_PML
+ !PIEZO
+  use constants, only : myrank, IMAIN
+ !PIEZO
+
 
   implicit none
 
+write(IMAIN,*) 'myrank1 = ', myrank
   ! MPI initialization
   call init_mpi()
 
@@ -374,10 +379,11 @@
   ! sets up and precomputes simulation arrays
   call prepare_timerun()
 
-!"""""""""""""""""""""""""""""""""""""""" PIEZO
+!PIEZO
   call prepare_piezo()
-!"""""""""""""""""""""""""""""""""""""""" PIEZO
+!PIEZO
 
+write(IMAIN,*) 'myrank2 = ', myrank
   ! steps through time iterations
   if (UNDO_ATTENUATION_AND_OR_PML) then
     call iterate_time_undoatt()
@@ -391,8 +397,8 @@
   ! MPI finish
   call finalize_mpi()
 
-!"""""""""""""""""""""""""""""""""""""""" PIEZO
+!PIEZO
   call finalize_piezo()
-!"""""""""""""""""""""""""""""""""""""""" PIEZO
+!PIEZO
   end program specfem2D
 

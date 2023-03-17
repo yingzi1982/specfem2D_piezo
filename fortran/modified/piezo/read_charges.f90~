@@ -34,7 +34,7 @@ do while(ier == 0)
 enddo
 close(IIN)
 
-!write(IMAIN,*) 'The total charge number is: ', charge_number
+write(IMAIN,*) 'The total charge number is: ', charge_number
 
 allocate(charges(charge_number,3), stat=ier)
 if (ier /= 0) call exit_MPI(myrank,'Error allocating charge array.')

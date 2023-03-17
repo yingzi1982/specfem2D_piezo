@@ -19,7 +19,7 @@ implicit none
 
 character(len=MAX_STRING_LEN) :: voltage_time_function_filename
 
-real(kind=CUSTOM_REAL) :: dummy_t
+double precision :: dummy_t
 
 integer :: ier
 integer :: i_time
