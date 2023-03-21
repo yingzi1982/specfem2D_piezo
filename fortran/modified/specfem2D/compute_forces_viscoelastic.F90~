@@ -201,7 +201,7 @@
           sigma_zx_piezo(i,j) = dummy_sigma_zx_piezo
         enddo
       enddo
-      write(IMAIN,*) 'rank = ', myrank, 'it = ', it, 'max sigma_piezo = ', maxval(sigma_xx_piezo), maxval(sigma_zz_piezo), maxval(sigma_xz_piezo)
+      !write(IMAIN,*) 'rank = ', myrank, 'it = ', it, 'max sigma_piezo = ', maxval(sigma_xx_piezo), maxval(sigma_zz_piezo), maxval(sigma_xz_piezo)
     endif
 !PIEZO
 
@@ -474,10 +474,10 @@
 !PIEZO
         !if ((is_piezo) .and. (.not.(ispec_is_PML(ispec)))) then
         if ((is_piezo)) then
-          !sigma_xx = sigma_xx + sigma_xx_piezo(i,j) * voltage_time_function(it)
-          !sigma_zz = sigma_zz + sigma_zz_piezo(i,j) * voltage_time_function(it)
-          !sigma_xz = sigma_xz + sigma_xz_piezo(i,j) * voltage_time_function(it)
-          !sigma_zx = sigma_zx + sigma_zx_piezo(i,j) * voltage_time_function(it)
+          sigma_xx = sigma_xx + sigma_xx_piezo(i,j) * voltage_time_function(it)
+          sigma_zz = sigma_zz + sigma_zz_piezo(i,j) * voltage_time_function(it)
+          sigma_xz = sigma_xz + sigma_xz_piezo(i,j) * voltage_time_function(it)
+          sigma_zx = sigma_zx + sigma_zx_piezo(i,j) * voltage_time_function(it)
         endif
 !PIEZO
 

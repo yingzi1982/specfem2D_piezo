@@ -106,7 +106,7 @@ for i=1:length(fingers)
     for nStation = 1:finger_point_number
       signal_x = dlmread([signal_folder networkName{nF_index(nStation)} '.' stationName{nF_index(nStation)} band_x],'',startRowNumber,startColumnNumber);
       signal_z = dlmread([signal_folder networkName{nF_index(nStation)} '.' stationName{nF_index(nStation)} band_z],'',startRowNumber,startColumnNumber);
-      max(signal_x)
+      %max(signal_x)
       nF_combined_signal_x = [nF_combined_signal_x signal_x((1:time_resample_rate:end))];
       nF_combined_signal_z = [nF_combined_signal_z signal_z((1:time_resample_rate:end))];
 
@@ -143,8 +143,9 @@ for i=1:length(fingers)
 end
 
 max(charge)
+min(charge)
 current = [gradient(charge,dt)];
-max(current)
+%max(current)
 
 charge = [t charge]; 
 current = [t current];

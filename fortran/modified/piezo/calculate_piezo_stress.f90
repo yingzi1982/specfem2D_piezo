@@ -48,10 +48,11 @@ do i_charge = 1,charge_number
   total_electric = total_electric + electric
 end do
 
-dummy_sigma = -matmul(transpose(piezoelectric_constant_2d),electric)
+dummy_sigma = -matmul(transpose(piezoelectric_constant_2d),total_electric)
 
 dummy_sigma_xx = dummy_sigma(1)
 dummy_sigma_zz = dummy_sigma(2)
 dummy_sigma_xz = dummy_sigma(3)
 dummy_sigma_zx = dummy_sigma_xz
+
 end subroutine

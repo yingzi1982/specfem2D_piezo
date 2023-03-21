@@ -45,15 +45,7 @@ do i_charge = 1,charge_number
   dummy_coord = [dummy_coord_x,dummy_coord_z]
   displacement = dummy_coord - charge_position
   electric = -charge_value*displacement/(norm2(displacement)**2)
-  !total_electric = total_electric + electric
-  total_electric = 1.0
-  
-  !write(IMAIN,*) i_charge
-  !write(IMAIN,*) 'charge', charge_position(1), charge_position(2), charge_value
-  !write(IMAIN,*) 'displacement', displacement(1), displacement(2), norm2(displacement)
-  !write(IMAIN,*) 'electric', electric(1), electric(2), norm2(electric)
-  !call flush_IMAIN()
-  !write(IMAIN,*) 'total electric', total_electric(1), total_electric(2), norm2(total_electric)
+  total_electric = total_electric + electric
 end do
 
 dummy_sigma = -matmul(transpose(piezoelectric_constant_2d),electric)
@@ -62,4 +54,5 @@ dummy_sigma_xx = dummy_sigma(1)
 dummy_sigma_zz = dummy_sigma(2)
 dummy_sigma_xz = dummy_sigma(3)
 dummy_sigma_zx = dummy_sigma_xz
+
 end subroutine

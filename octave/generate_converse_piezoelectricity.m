@@ -63,6 +63,9 @@ case '2D'
   [stress1partialx, stress1partialz] = gradient(stress1,dx,dz);
   [stress2partialx, stress2partialz] = gradient(stress2,dx,dz);
   [stress3partialx, stress3partialz] = gradient(stress3,dx,dz);
+  max(stress1(:))
+  max(stress2(:))
+  max(stress3(:))
 
   bodyforce_x = (stress1partialx + stress3partialz);
   bodyforce_z = (stress2partialz + stress3partialx);
