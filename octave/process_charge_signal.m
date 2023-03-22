@@ -46,7 +46,7 @@ admittance = admittance(freqIndex,:);
 %conductance = real(admittance);
 %susceptance = imag(admittance);
 conductance = imag(admittance);
-susceptance = real(admittance);
+susceptance = -real(admittance);
 
 %conductance = conductance./max(abs(conductance));
 %susceptance = susceptance./max(abs(susceptance));
