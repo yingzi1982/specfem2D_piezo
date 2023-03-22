@@ -39,13 +39,14 @@ charge_spectrum = trace2spectrum(charge);
 current_spectrum = trace2spectrum(current);
 f = voltage_spectrum(:,1);
 admittance = i*2*pi*f.*charge_spectrum(:,2:end)./voltage_spectrum(:,2:end);
-admittance = admittance*exp(i*pi/4);
 %admittance = current_spectrum(:,2:end)./voltage_spectrum(:,2:end);
 freqIndex = find(f>0.5e9&f<1.5e9);
 f = f(freqIndex);
 admittance = admittance(freqIndex,:);
-conductance = real(admittance);
-susceptance = imag(admittance);
+%conductance = real(admittance);
+%susceptance = imag(admittance);
+conductance = imag(admittance);
+susceptance = real(admittance);
 
 %conductance = conductance./max(abs(conductance));
 %susceptance = susceptance./max(abs(susceptance));
